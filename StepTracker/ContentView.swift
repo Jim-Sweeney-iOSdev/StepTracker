@@ -10,8 +10,44 @@ import CoreData
 
 struct ContentView: View {
     
+    @State private var stepCount: Double
+        = 0
+    let healthStore = HealthStore()
+    
     var body: some View {
-        Text("hello world")
+        VStack {
+            Text("Today's Steps")
+                .font(.title)
+            Text("\(Int(stepCount))")
+                .bold()
+                .font(.largeTitle)
+            Button("Fetch Steps") {
+                healthStore
+                    .fetchStepCount {
+                        steps in
+                        stepCount = steps
+                    }
+            }
+            .buttonStyle (
+                .borderedProminent)
+            .tint(.green)
+        }
+        .padding()
+        .onAppear{
+            requestHealthKitAccess()
+                
+            }
+        }
+         
+        func requestHealthKitAccess() {
+            healthStore.requestAuthorization {
+                succes, error in
+                if let error = error {
+                    print("HealthKit auth failed")
+                } else  {
+                    print("HealthKit was successful")
+                }
+            }
     }
 }
 

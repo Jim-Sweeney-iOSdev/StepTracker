@@ -21,13 +21,13 @@ struct ContentView: View {
         ZStack {
             // Background Gradient
             LinearGradient(
-                        colors: [
-                            accent.opacity(0.4),
-                            accent.opacity(0.9)
-                        ],
-                        startPoint: .topLeading,
-                        endPoint: .bottomTrailing
-            )
+                       colors: [
+                           accent.opacity(0.4),
+                           accent.opacity(0.9)
+                       ],
+                       startPoint: .topLeading,
+                       endPoint: .bottomTrailing
+                   )
             .ignoresSafeArea()
 
             VStack(spacing: 32) {
